@@ -28,3 +28,7 @@ def generate_code(state: AgentState) -> AgentState:
     }
 
 generate_code_chain = RunnableLambda(generate_code)
+
+result = generate_code_chain.invoke({
+    "prompt": "Write a code to load a csv file using pandas."
+})

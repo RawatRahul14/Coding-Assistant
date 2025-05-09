@@ -4,7 +4,7 @@ from typing_extensions import NotRequired
 class AgentState(TypedDict):
     prompt: str
     code: NotRequired[List[str]]
-    explanation: NotRequired[str]
+    explanation: NotRequired[List[str]]
     requirements: NotRequired[Optional[str]]
     output: NotRequired[str]
     error: NotRequired[str]

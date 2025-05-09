@@ -16,6 +16,7 @@ generate_prompt = ChatPromptTemplate.from_messages(
             - Avoid unnecessary use of try-except blocks unless the user explicitly asks for error handling or the operation clearly requires it (e.g., file I/O, API calls).
             - Keep the code concise and focused on the task.
             - Do Not give section name if there's no corresponding code for it.
+            - The number of items in the code list and requirements list must always be same and the section names must be same for both.
             ---
             Output:
                 1. A flat list alternating between **section names** and their corresponding Python code blocks.
@@ -27,7 +28,12 @@ generate_prompt = ChatPromptTemplate.from_messages(
                         "Data Ingestion", "`Data Ingestion code`",
                         "Data Cleaning", "`Data Cleaning Code`"
                      ]
-                2. A brief explanation of the overall code logic (step-by-step or modular).
+                2. A brief explanation of the overall code logic (step-by-step or modular). Make it similarly like the code:
+                    - Example:
+                    [
+                        "Data Ingestion", "`Data Ingestion Explanation`",
+                        "Data Cleaning", "`Data Cleaning Explanation`"
+                    ]
                 3. Installation commands for any required libraries (e.g., 'pip install pandas'), or None if not needed.
             """
         )

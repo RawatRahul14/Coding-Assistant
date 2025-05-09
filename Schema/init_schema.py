@@ -5,7 +5,7 @@ class GenerateCodeSchema(BaseModel):
     code: List[str] = Field(
         description = "List alternating between code section names and corresponding code strings."
     )
-    explanation: str = Field(
+    explanation: List[str] = Field(
         description="A concise explanation of the code logic."
     )
     requirements: Optional[str] = Field(
