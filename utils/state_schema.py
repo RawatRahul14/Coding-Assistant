@@ -1,10 +1,13 @@
-from typing import TypedDict, Union
+from typing import TypedDict, Optional, Union
+from typing_extensions import NotRequired
 
 class AgentState(TypedDict):
     prompt: str
-    code: str
-    output: str
-    error: str
-    step_count: int
-    max_steps: int
-    final: Union[str, None]
+    code: NotRequired[str]
+    explanation: NotRequired[str]
+    requirements: NotRequired[Optional[str]]
+    output: NotRequired[str]
+    error: NotRequired[str]
+    step_count: NotRequired[int]
+    max_steps: NotRequired[int]
+    final: NotRequired[Union[str, None]]

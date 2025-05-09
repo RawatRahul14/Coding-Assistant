@@ -28,8 +28,6 @@ if st.button("Run Assistant"):
         if result["final"] == "success":
             st.success("✅ Execution successful!")
             st.subheader("🖨️ Output")
-            st.text(result["output"])
         else:
             st.error("❌ Failed after max retries.")
             st.subheader("🚫 Last Error")
-            st.text(result["error"])
