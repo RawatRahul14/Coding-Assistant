@@ -1,13 +1,25 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 
 class GenerateCodeSchema(BaseModel):
-    code: str = Field(description = "The complete runnable code inside a Python code block.")
-    explanation: str = Field(description = "A brief explanation of the code logic.")
-    requirements: Optional[str] = Field(default = None,
-                                        description = "Installation commands for required libraries, if any.")
+    code: List[str] = Field(
+        description = "List alternating between code section names and corresponding code strings."
+    )
+    explanation: str = Field(
+        description="A concise explanation of the code logic."
+    )
+    requirements: Optional[str] = Field(
+        default = None,
+        description = "Shell commands to install any required libraries (if applicable).")
     
 class ReflectErrorSchema(BaseModel):
-    code: str = Field(description = "The corrected version of the Python code.")
-    explanation: str = Field(description = "A clear explanation of how the corrected code works.")
-    requirements: Optional[str] = Field(default = None, description = "Updated or confirmed requirements the code satisfies.")
+    code: List[str] = Field(
+        description="A corrected version of the provided Python code."
+    )
+    explanation: str = Field(
+        description="A clear explanation of how the corrected code works. This should be error-free."
+    )
+    requirements: Optional[str] = Field(
+        default = None, 
+        description = "Updated or confirmed installation requirements (if any)."
+    )

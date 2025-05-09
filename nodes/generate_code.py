@@ -22,7 +22,7 @@ def generate_code(state: AgentState) -> AgentState:
 
     return {
         **state,
-        "code": tool_args.get("code", ""),
+        "code": tool_args.get("code"),
         "explanation": tool_args.get("explanation", ""),
         "requirements": tool_args.get("requirements", None)
     }
