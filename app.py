@@ -13,8 +13,10 @@ if st.button("Run Assistant"):
         state = {
             "prompt": user_prompt,
             "code": "",
-            "output": "",
+            "explanation": "",
+            "requirements": "",
             "error": "",
+            "output": "",
             "step_count": 0,
             "max_steps": max_steps,
             "final": None
@@ -22,12 +24,8 @@ if st.button("Run Assistant"):
 
         result = app.invoke(state)
 
-        st.subheader("📄 Final Code")
-        st.code(result["code"], language="python")
+        st.subheader("🧠 Required Packages to install")
+        st.code(result["requirements"], language = "python")
 
-        if result["final"] == "success":
-            st.success("✅ Execution successful!")
-            st.subheader("🖨️ Output")
-        else:
-            st.error("❌ Failed after max retries.")
-            st.subheader("🚫 Last Error")
+        st.subheader("📄 Final Code")
+        st.code(result["code"], language = "python")
