@@ -15,11 +15,16 @@ def generate_code(state: AgentState) -> AgentState:
     prompt = generate_prompt.format(task = state["prompt"])
     result = llm.invoke(prompt)
 
+    if not result.tool_calls:
+        raise ValueError("No tool call was made. Make sure your prompt is designed to invoke the tool.")
+
+    tool_args = result.tool_calls[0]["args"]
+
     return {
         **state,
-        "code": result.code,
-        "explanation": result.explanation,
-        "requirements": result.requirements
+        "code": tool_args.get("code", ""),
+        "explanation": tool_args.get("explanation", ""),
+        "requirements": tool_args.get("requirements", None)
     }
 
 generate_code_chain = RunnableLambda(generate_code)
