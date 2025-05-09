@@ -16,7 +16,7 @@ class ReflectErrorSchema(BaseModel):
     code: List[str] = Field(
         description="A corrected version of the provided Python code."
     )
-    explanation: str = Field(
+    explanation: List[str] = Field(
         description="A clear explanation of how the corrected code works. This should be error-free."
     )
     requirements: Optional[str] = Field(

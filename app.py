@@ -3,7 +3,7 @@ from graph import build_graph
 
 st.title("🧠 Self-Improving Coding Assistant")
 
-user_prompt = st.text_area("Enter a coding task:", height = 100)
+user_prompt = st.text_area("Enter a coding task:", height=100)
 max_steps = st.slider("Max retries", 1, 5, 3)
 
 if st.button("Run Assistant"):
@@ -12,8 +12,8 @@ if st.button("Run Assistant"):
 
         state = {
             "prompt": user_prompt,
-            "code": "",
-            "explanation": "",
+            "code": [],
+            "explanation": [],
             "requirements": "",
             "error": "",
             "output": "",
@@ -24,8 +24,25 @@ if st.button("Run Assistant"):
 
         result = app.invoke(state)
 
-        st.subheader("🧠 Required Packages to install")
-        st.code(result["requirements"], language = "python")
+        # Show Required Installs
+        st.subheader("📦 Required Installs")
+        st.code(result["requirements"] or "None", language="bash")
 
-        st.subheader("📄 Final Code")
-        st.code(result["code"], language = "python")
+        # Interleaved Explanation + Code
+        st.markdown("---")
+        st.subheader("🧠 Explanation and Code")
+
+        explanation = result["explanation"]
+        code = result["code"]
+
+        section_count = min(len(explanation), len(code)) // 2
+
+        for i in range(section_count):
+            section_name = explanation[i * 2]
+            section_expl = explanation[i * 2 + 1]
+            section_code = code[i * 2 + 1]
+
+            st.markdown(f"### 🔹 {section_name}")
+            st.markdown(f"**Explanation:** {section_expl}")
+            st.code(section_code, language="python")
+            st.markdown("---")

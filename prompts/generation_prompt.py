@@ -34,7 +34,7 @@ generate_prompt = ChatPromptTemplate.from_messages(
                         "Data Ingestion", "`Data Ingestion Explanation`",
                         "Data Cleaning", "`Data Cleaning Explanation`"
                     ]
-                3. Installation commands for any required libraries (e.g., 'pip install pandas'), or None if not needed.
+                3. Installation commands for any required libraries (e.g., 'pip install pandas').
             """
         )
     ]
